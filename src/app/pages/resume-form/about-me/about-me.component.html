@@ -1,0 +1,38 @@
+<form [formGroup]="aboutMeForm" class="form-container">
+  <mat-form-field appearance="outline">
+    <mat-label>Ім'я</mat-label>
+    <input matInput formControlName="firstName" required>
+    <mat-error *ngIf="aboutMeForm.get('firstName')?.hasError('required')">Обов'язкове поле</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Прізвище</mat-label>
+    <input matInput formControlName="lastName" required>
+    <mat-error *ngIf="aboutMeForm.get('lastName')?.hasError('required')">Обов'язкове поле</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Дата народження</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="birthDate" required>
+    <mat-datepicker-toggle matSuffix [for]="picker">
+      <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+    </mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="aboutMeForm.get('birthDate')?.hasError('required')">Обов'язкове поле</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" required email>
+    <mat-error *ngIf="aboutMeForm.get('email')?.hasError('required')">Обов'язкове поле</mat-error>
+    <mat-error *ngIf="aboutMeForm.get('email')?.hasError('email')">Невірний формат email</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Номер телефону</mat-label>
+    <span matPrefix>{{ phonePrefix }}&nbsp;</span>
+    <input matInput #phoneInput type="tel" formControlName="phone" mask="(000) 000-00-00" required>
+    <mat-error *ngIf="aboutMeForm.get('phone')?.hasError('required')">Обов'язкове поле</mat-error>
+    <mat-error *ngIf="aboutMeForm.get('phone')?.hasError('invalidPhone')">Невірний формат телефону</mat-error>
+  </mat-form-field>
+</form>

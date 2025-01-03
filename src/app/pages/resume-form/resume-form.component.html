@@ -1,0 +1,15 @@
+<mat-horizontal-stepper [linear]="true" #stepper>
+  <mat-step label="Про мене" [completed]="isValidForm('aboutMe')">
+    <ng-template matStepLabel>Про мене</ng-template>
+  </mat-step>
+  <mat-step label="Освіта" [completed]="isValidForm('education')">
+    <ng-template matStepLabel>Освіта</ng-template>
+  </mat-step>
+</mat-horizontal-stepper>
+
+<router-outlet></router-outlet>
+
+<div class="buttons">
+  <button mat-button *ngIf="currentStep > 0" (click)="goToPreviousStep()">Назад</button>
+  <button mat-button [disabled]="!isCurrentStepValid()" (click)="goToNextStep()">Далі</button>
+</div>
